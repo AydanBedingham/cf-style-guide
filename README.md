@@ -26,8 +26,24 @@ This is an initial draft of a CloudFormation template style guide. The intent is
 
     This guide is focused primarily on YAML syntax however some of the rules will also apply to JSON.
 
-  <a name="language--numbers"></a><a name="1.2"></a>
-  - [1.2](#language--numbers) Surround numbers starting with a zero in quotes.
+  <a name="language--quotes"></a><a name="1.2"></a>
+  - [1.2](#language--quotes) Prefer no quotes over quotes for variables
+
+    > Why? In YAML you can use either single quotes (' '), double quotes (" "), or no quotes around strings. All three approaches are valid and will be interpreted correctly by CloudFormation, however to reduce verbosity where possible no quotes should be preferred over single quotes and single quotes preferred over double quotes.
+
+    ```yaml
+    # bad
+    Text: 'The cat sat on the mat.'
+
+    # bad
+    Text: "The cat sat on the mat."
+    
+    # good
+    AccountId: The cat sat on the mat.
+    ```
+
+  <a name="language--numbers"></a><a name="1.3"></a>
+  - [1.3](#language--numbers) Surround numbers starting with a zero in quotes.
 
     > Why? YAML will treat numbers starting with a zero as octal.
 
