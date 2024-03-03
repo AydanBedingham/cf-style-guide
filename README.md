@@ -27,7 +27,7 @@ This is an initial draft of a CloudFormation template style guide. The intent is
     This guide is focused primarily on YAML syntax however some of the rules will also apply to JSON.
 
   <a name="language--quotes"></a><a name="1.2"></a>
-  - [1.2](#language--quotes) Prefer no quotes over quotes for variables
+  - [1.2](#language--quotes) Prefer no quotes over quotes for variables.
 
     > Why? In YAML you can use either single quotes (' '), double quotes (" "), or no quotes around strings. All three approaches are valid and will be interpreted correctly by CloudFormation, however to reduce verbosity where possible no quotes should be preferred over single quotes and single quotes preferred over double quotes.
 
@@ -280,33 +280,25 @@ This is an initial draft of a CloudFormation template style guide. The intent is
     ```
 
   <a name="resources--physical-resource-id"></a><a name="6.2"></a>
-  - [6.2](#resources--physcial-resource-id) Avoid explicitly naming resources.
+  - [6.2](#resources--physcial-resource-id) Resource naming conventions.
 
-    > Why? Explicitly naming resources complicates stack updates where this resource needs to be replaced. This is because CloudFormation will create the new resources first, before removing the old one. Avoid becoming attached to names, where possible.
-
-    ```yaml
-
-    # bad
-    WebappStatisticsDdbTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          ...
-        KeySchema:
-          ...
-        TableName: TableName
-
-    # good
-    WebappStatisticsDdbTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          ...
-        KeySchema:
-          ...
+    > Why? It is important to ensure resources are named in a consistent way. Abbreviating service names conveys useful information while mitigating issues from resource name length constraints.
     ```
+    CloudFormation Template: <env>-cf-<name>
+    CloudFormation Stackset: <env>-cfst-<name>
 
-    Note: There are some exceptions to this rule. There might be valid reasons for following a naming convention, or for knowing a resource name up-front. Also to avoid circular dependency issues within a template, a resource name may need to be specified (S3/Lambda for example).
+    S3 Bucket:
+    <org>-<env>-<name>
+
+    Roles:
+    <org>-<env>-role-<name>
+
+    Athena Table: <env>-<name>_tbl
+    Athena View: <env>-<name>_vw
+
+    Step Function State Machine: <env>-sfsm-<name>
+    Lambda Function: <env>-lmfn-<name>
+    ```
 
   <a name="resources--securitygroupvpc"></a><a name="6.3"></a>
   - [6.3](#resources--securitygroupvpc) Always be explicit when referencing security group IDs.
