@@ -39,7 +39,7 @@ This is an initial draft of a CloudFormation template style guide. The intent is
     Text: "The cat sat on the mat."
     
     # good
-    AccountId: The cat sat on the mat.
+    Text: The cat sat on the mat.
     ```
 
   <a name="language--numbers"></a><a name="1.3"></a>
